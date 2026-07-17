@@ -18,19 +18,31 @@
 
 <title>Ford GT MK IV | Historia, Galería y Especificaciones</title>
 
-<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="Images/favicon.ico" type="image/x-icon">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/Styles.css">
 
 </head>
     
     <body class="bg-dark text-light">
+      <div id="loader">
+
+<div class="spinner-border text-danger"></div>
+
+<p>Cargando Ford GT...</p>
+
+</div>
+
+<header>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top">
   <div class="container">
 
@@ -121,14 +133,16 @@ Conoce la Historia
                 
                 
                 
-                <h3>🏁 Mi Garaje Ford GT</h3>
+  <h3>🏁 Mi Garaje Ford GT</h3>
 
-                <div class="favoritos-container">
+  <div class="favoritos-container">
 
     <input
         type="text"
         id="modeloInput"
         placeholder="Ej: Ford GT40">
+        
+        <button id="buscarBtn">Buscar</button>
 
     <input
         type="number"
@@ -143,28 +157,42 @@ Conoce la Historia
         Mostrar modelos modernos
     </button>
 
+    <button id="mostrarTodoBtn">
+     Mostrar todos
+    </button>
+
     <ul id="listaModelos"></ul>
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
-<footer class="bg-black text-center text-light p-4">
+<button id="btnArriba">
+    ↑ Volver arriba
+</button> 
+<footer class="bg-black text-center text-light py-5">
 
-<h4>FORD GT MK IV</h4>
+    <h4>FORD GT MK IV</h4>
 
-<p>Proyecto realizado para CoderHouse</p>
+    <p>Proyecto realizado para CoderHouse</p>
 
-<p>Joan Moreno</p>
+    <p>Joan Moreno</p>
 
 </footer>
 
 
-               
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<button id="btnArriba"> ↑ Volver arriba </button> 
-  <script src="Script.js"></script>
+<script src="Script.js"></script>
 
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+AOS.init({
+    duration:1000,
+    once:true
+});
+</script>
 </body>
 </html>
 

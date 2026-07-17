@@ -32,11 +32,28 @@ const modeloInput = document.getElementById("modeloInput");
 const anioInput = document.getElementById("anioInput");
 const agregarBtn = document.getElementById("agregarBtn");
 const filtrarBtn = document.getElementById("filtrarBtn");
+const mostrarTodoBtn = document.getElementById("mostrarTodoBtn");
+const buscarBtn = document.getElementById("buscarBtn");
+const buscarInput = document.getElementById("buscarInput");
 const listaModelos = document.getElementById("listaModelos");
 
 if (modeloInput && anioInput && agregarBtn && filtrarBtn && listaModelos) {
 
-    let modelos = JSON.parse(localStorage.getItem("modelosFord")) || [];
+let modelos = [];
+
+fetch("data/modelos.json")
+
+.then(response => response.json())
+
+.then(data => {
+
+    const guardados = JSON.parse(localStorage.getItem("modelosFord"));
+
+    modelos = guardados || data;
+
+    mostrarModelos(modelos);
+
+});
 
     // Permite agregar con Enter
     [modeloInput, anioInput].forEach(input => {
@@ -56,6 +73,22 @@ if (modeloInput && anioInput && agregarBtn && filtrarBtn && listaModelos) {
 
     // Mostrar modelos
     function mostrarModelos(lista) {
+
+        if(lista.length===0){
+
+listaModelos.innerHTML=`
+
+<li class="sinResultados">
+
+No se encontraron modelos.
+
+</li>
+
+`;
+
+return;
+
+}
 
         listaModelos.innerHTML = "";
 
@@ -92,9 +125,35 @@ if (modeloInput && anioInput && agregarBtn && filtrarBtn && listaModelos) {
         const nombre = modeloInput.value.trim();
         const anio = Number(anioInput.value);
 
+        const anioActual=new Date().getFullYear();
+
+if(anio<1964 || anio>anioActual){
+
+Swal.fire({
+
+icon:"error",
+
+title:"Año inválido",
+
+text:"Ingresa un año entre 1964 y el actual."
+
+});
+
+return;
+
+}
+
         if (nombre === "" || !anio) {
 
-            alert("Completa todos los campos");
+            Swal.fire({
+
+    icon: "warning",
+
+    title: "Campos incompletos",
+
+    text: "Debes completar todos los datos."
+
+});
             return;
 
         }
@@ -110,6 +169,18 @@ if (modeloInput && anioInput && agregarBtn && filtrarBtn && listaModelos) {
 
         guardarModelos();
 
+        Swal.fire({
+
+    icon:"success",
+
+    title:"Modelo agregado",
+
+    timer:1500,
+
+    showConfirmButton:false
+
+});
+
         mostrarModelos(modelos);
 
         modeloInput.value = "";
@@ -124,7 +195,45 @@ if (modeloInput && anioInput && agregarBtn && filtrarBtn && listaModelos) {
 
             const indice = e.target.dataset.id;
 
-            modelos.splice(indice, 1);
+            Swal.fire({
+
+title:"¿Eliminar modelo?",
+
+text:"Esta acción no se puede deshacer.",
+
+icon:"warning",
+
+showCancelButton:true,
+
+confirmButtonText:"Eliminar",
+
+cancelButtonText:"Cancelar"
+
+}).then((result)=>{
+
+if(result.isConfirmed){
+
+modelos.splice(indice,1);
+
+guardarModelos();
+
+mostrarModelos(modelos);
+
+Swal.fire({
+
+icon:"success",
+
+title:"Modelo eliminado",
+
+timer:1500,
+
+showConfirmButton:false
+
+});
+
+}
+
+});
 
             guardarModelos();
 
@@ -147,7 +256,58 @@ if (modeloInput && anioInput && agregarBtn && filtrarBtn && listaModelos) {
 
     });
 
-    // Mostrar al cargar
+buscarBtn.addEventListener("click",()=>{
+
+const texto = buscarInput.value.toLowerCase();
+
+const encontrados = modelos.filter(modelo=>{
+
+return modelo.nombre.toLowerCase().includes(texto);
+
+});
+
+mostrarModelos(encontrados);
+
+});
+
+mostrarTodoBtn.addEventListener("click",()=>{
+
     mostrarModelos(modelos);
 
+});
+
+window.addEventListener("load", () => {
+
+    const loader = document.getElementById("loader");
+
+    if (loader) {
+
+        loader.style.opacity = "0";
+
+        setTimeout(() => {
+
+            loader.style.display = "none";
+
+        }, 500);
+
+    }
+
+});
+
 }
+
+window.addEventListener("load", () => {
+
+    const loader = document.getElementById("loader");
+
+    if (loader) {
+
+        loader.style.opacity = "0";
+
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 500);
+
+    }
+
+});
