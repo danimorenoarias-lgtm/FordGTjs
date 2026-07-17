@@ -1,0 +1,109 @@
+@import "Variables";
+@import "Mixins";
+@import "Base";
+@import "layouts";
+@import "Components";
+@import "Responsive";
+
+.imagenes-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 1000px;
+    margin: 50px auto;
+}
+
+.imagenes-grid img{
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.imagenes-grid img:hover{
+    transform: scale(1.05);
+}
+
+img{
+    display: block;
+    margin: 30px auto;
+    max-width: 100%;
+    border-radius: 12px;
+}
+
+img{
+    transition: .4s ease;
+    cursor: pointer;
+}
+
+img:hover{
+    transform: scale(1.08);
+    filter: brightness(1.15);
+}
+
+
+body{
+    font-family: $fuente-texto !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    font-family: $fuente-titulos !important;
+}
+
+.galeria-img{
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    transition: .4s ease;
+    cursor: pointer;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.4);
+}
+
+.galeria-img:hover{
+    transform: scale(1.05);
+    filter: brightness(1.15);
+}
+
+section{
+
+animation: aparecer .8s ease;
+
+}
+
+@keyframes aparecer{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+.navbar{
+
+box-shadow:0 5px 15px rgba(0,0,0,.5);
+
+}
+
+*{
+
+transition:.25s;
+
+}

@@ -1,0 +1,32 @@
+@mixin botonRojo{
+
+    background:$color-principal;
+    color:white;
+    border:none;
+    border-radius:$radio;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+@mixin centrar{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+@mixin boton {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #e50914;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+
+    &:hover{
+        background: #b80710;
+    }
+}

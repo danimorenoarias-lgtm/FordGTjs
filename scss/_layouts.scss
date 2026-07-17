@@ -1,0 +1,17 @@
+nav{
+
+    @include centrar;
+
+    gap:20px;
+
+    a{
+
+        color:white;
+
+        &:hover{
+            color:$color-principal;
+        }
+
+    }
+
+}
